@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack --mode development",
+    "dev:server": "webpack-dev-server --mode development",
     "pro": "webpack --mode production"
   },
   "repository": {
@@ -20,12 +21,18 @@
   },
   "homepage": "https://github.com/bldf/yd-spa#readme",
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "progress-bar-webpack-plugin": "^1.11.0",
+    "speed-measure-webpack-plugin": "^1.2.3",
     "style-loader": "^0.23.1",
     "webpack": "^4.21.0",
+    "webpack-build-notifier": "^0.1.30",
     "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10",
     "webpack-merge": "^4.1.4",
     "yargs-parser": "^11.0.0"
   }
