@@ -1,6 +1,14 @@
 import  item from  "./sync.css" ;
+import  help from  '../common';
+
 const  syncs = ()=>{
-    document.querySelector('#app').innerHTML=`<h1 class="${item.test}"> 我的第一个单页应用 好开心啊</h1>` ;
+    setTimeout(function(){
+
+
+        document.querySelector('#app').innerHTML=`<h1 class="${item.test}"> 我的第一个单页应用 好开心啊</h1>` ;
+
+    },2000);
+    console.log('sync.js-->',help.version) ;
     fetch('/api/test').then(response=>response.json()).then(data=>{console.log(data)})
         .catch(err=>{
             console.log('访问地址错误啦') ;

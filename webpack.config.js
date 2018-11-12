@@ -17,7 +17,13 @@ const SpeedMeasurePlugin = require("speed-measure-webpack-plugin"); // 打印 ch
 const smp = new SpeedMeasurePlugin();// 打印 chunk 的时间 。（第二部）
 
 const CleanWebpackPlugin = require('clean-webpack-plugin'); //帮助我们自动删除打包生成的dist的目录
+const fs = require("fs");
+const loading = {
+    // html:resolve('./loading.html')
+    html: fs.readFileSync('./loading.html','utf-8')
+};
 
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 // webpack 默认会去找 src下边的index.js . 如果是单页应用 。entry这个入口文件，就可以不用写了
 // output： 默认也会去dist中，默认为main.js . 如果是单页引用也可以不用写了
 // HtmlWebpackPlugin 主要作用就是插入js到制定的html
@@ -52,6 +58,24 @@ let webpackConfig = {//基本配置， 外边的配置， 在config里边。可�
             });
         }
     },
+    optimization: {
+        noEmitOnErrors:false,//如果报错，不打包
+        splitChunks:{// 配置公共包, 当一个js文件多次被引入的时候， 提取出来
+            cacheGroups:{
+                commons:{
+                    chunks:'inital',
+                    name:'common',
+                    minChunks:2,
+                    maxInitalRequests:5,
+                    minSize:0
+                }
+            }
+          // chunks:'all'
+        },
+        runtimeChunk: {//配置运行时的包
+            name: 'runtime'
+        }
+    },
     plugins: [
         // 正常在我们开发的时候，会用到各种不同的组件， 一个单页项目就是不同的组件组成的
         new MiniCssExtractPlugin({
@@ -63,12 +87,14 @@ let webpackConfig = {//基本配置， 外边的配置， 在config里边。可�
         new HtmlWebpackPlugin({// 会帮我们生成一个index.html,默认会存放到dist的目录下边
             filename: 'index.html',
             template: 'src/index.html',// html模板的地址
+            loading,
             minify:{
                 removeComments:_modeflag,// 去除空格
                 collapseWhitespace:_modeflag,// 去除注释
                 // removeAttributeQuotes:_modeflag  // 是否去除引号
             }
         }),
+        // new InlineManifestWebpackPlugin('runtime'),
         new WebpackBuildNotifierPlugin({
             title: "webpack 配置结果",
             logo: resolve("./img/favicon.png"),
