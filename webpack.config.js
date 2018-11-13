@@ -27,52 +27,87 @@ const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 // webpack 默认会去找 src下边的index.js . 如果是单页应用 。entry这个入口文件，就可以不用写了
 // output： 默认也会去dist中，默认为main.js . 如果是单页引用也可以不用写了
 // HtmlWebpackPlugin 主要作用就是插入js到制定的html
-let webpackConfig = {//基本配置， 外边的配置， 在config里边。可以区分开发环境和上线环境
+let webpackConfig;
+webpackConfig = {//基本配置， 外边的配置， 在config里边。可以区分开发环境和上线环境
     module: {
-        rules: [{
-                test: /\.css$/,
-                use: [{
-                    loader: MiniCssExtractPlugin.loader,
-                    // options: {
-                    //     // you can specify a publicPath here
-                    //     // by default it use publicPath in webpackOptions.output
-                    //     publicPath: '../'
-                    // }
-                },{
-                        loader: 'css-loader',// 让我们可以使用import导入css文件
-                        options: {
-                            modules: true,
-                            localIdentName: '[path][name]__[local]--[hash:base64:5]'
-                        }
+        rules: [{//配置图片压缩的loader
+            test: /\.(gif|png|jpe?g|svg)$/i,
+            use: [
+                'file-loader',
+                {
+                    loader: 'image-webpack-loader',
+                    options: {
+                        bypassOnDebug: true, // webpack@1.x
+                        disable: true, // webpack@2.x and newer
+                    },
+                },
+            ],
+        },{//配置，图片小于多少转换为base64
+            test: /\.(png|jpg|gif|ttf|otf|svg)$/i,
+            use: [
+                {
+                    loader: 'url-loader',
+                    options: {
+                        limit: 10 * 1024  // 如果页面中的图片的大小小于10kb， 直接转换为base64到页面中
                     }
-                ]
-            }]
+                }
+            ]
+        },{
+            test: /\.css$/,
+            use: [{
+                loader: MiniCssExtractPlugin.loader,
+                // options: {
+                //     // you can specify a publicPath here
+                //     // by default it use publicPath in webpackOptions.output
+                //     publicPath: '../'
+                // }
+            }, {
+                loader: 'css-loader',// 让我们可以使用import导入css文件
+                options: {
+                    modules: true,
+                    localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                }
+            }
+            ]
+        }]
     },
-    devServer:{
-        before(app){
-            app.get('/api/test',(req,res)=>{
+    devServer: {
+        before(app) {
+            app.get('/api/test', (req, res) => {
                 res.json({
-                    code:'200',
-                    message:{aa:"23中的   "}
+                    code: '200',
+                    message: {aa: "23中的   "}
                 });
             });
         }
     },
+    //watch:_modeflag,//是否不死掉进程，监听代码修改自动部署， 如果使用了dev:server， 这个就没什么用
     optimization: {
-        noEmitOnErrors:false,//如果报错，不打包
+        noEmitOnErrors: false,//如果报错，不打包
         splitChunks:{// 配置公共包, 当一个js文件多次被引入的时候， 提取出来
             cacheGroups:{
                 commons:{
-                    chunks:'inital',
+                    chunks:'initial',
                     name:'common',
-                    minChunks:2,
-                    maxInitalRequests:5,
-                    minSize:0
+                    minChunks:2,// 一般都是2
+                    //minChunks:2, webpack考虑到性能优化的问题， 如果一个公共js的大小没有30kb就不拿出来作为一个请求
+                    //minChunks:1, 强制性的提取公共的包
+                    maxInitialRequests:5,
+                    minSize:0// 文件最小是0
                 }
             }
-          // chunks:'all'
         },
-        runtimeChunk: {//配置运行时的包
+        // splitChunks:{ // 配置提取公共的包
+        //     cacheGroups:{
+        //         chunks:'initial',
+        //         name:"common",
+        //         minChunks:2,// 只要有一个地方引入就开始打包
+        //         maxInitialRequests:5,//
+        //         minSize:0
+        //     }
+        // },
+        runtimeChunk: {   // webpack 把webpack运行时的代码抽取出来，这样我们的业务逻辑代码就会非常的简洁　
+// 但是这样会多了一个请求，如果是单页应用的话就会多发一次请求，这样就可以使用一个插件把这个插件给包裹起来
             name: 'runtime'
         }
     },
@@ -81,20 +116,20 @@ let webpackConfig = {//基本配置， 外边的配置， 在config里边。可�
         new MiniCssExtractPlugin({
             // Options similar to the same options in webpackOptions.output
             // both options are optional
-            filename: _modeflag ? "styles/[name].[contenthash:5].css":"styles/[name].css",
-            chunkFilename:_modeflag ? "styles[id].[contenthash].css" :  "styles/[id].css"//chunk 就是插入的顺序
+            filename: _modeflag ? "styles/[name].[contenthash:5].css" : "styles/[name].css",
+            chunkFilename: _modeflag ? "styles[id].[contenthash].css" : "styles/[id].css"//chunk 就是插入的顺序
         }),
         new HtmlWebpackPlugin({// 会帮我们生成一个index.html,默认会存放到dist的目录下边
             filename: 'index.html',
             template: 'src/index.html',// html模板的地址
             loading,
-            minify:{
-                removeComments:_modeflag,// 去除空格
-                collapseWhitespace:_modeflag,// 去除注释
+            minify: {
+                removeComments: _modeflag,// 去除空格
+                collapseWhitespace: _modeflag,// 去除注释
                 // removeAttributeQuotes:_modeflag  // 是否去除引号
             }
         }),
-        // new InlineManifestWebpackPlugin('runtime'),
+        new InlineManifestWebpackPlugin('runtime'),
         new WebpackBuildNotifierPlugin({
             title: "webpack 配置结果",
             logo: resolve("./img/favicon.png"),
@@ -103,6 +138,7 @@ let webpackConfig = {//基本配置， 外边的配置， 在config里边。可�
         new ProgressBarPlugin(),//webpack打包的时候使用的进度条
         new CleanWebpackPlugin(['dist'])
     ]
-}
+};
 // 越往后优先级越低
-module.exports = smp.wrap(merge(_mergeConfig,webpackConfig));
+module.exports = merge(_mergeConfig,webpackConfig);
+// module.exports = smp.wrap(merge(_mergeConfig,webpackConfig));

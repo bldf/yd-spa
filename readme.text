@@ -64,6 +64,42 @@
         1： 直接注入到标签内
         2： 添加解析js加载，可以写一个插件，能够写一个真实的loading
             把所有的js放入到一个数组里边去，可以做一个真loading
+28: webpack 运行时的代码得提取出来。
+29 : 自己配置babel-loader
+30 : 提取公共的代码 ：
+         optimization: {
+                noEmitOnErrors: false,//如果报错，不打包
+                splitChunks:{// 配置公共包, 当一个js文件多次被引入的时候， 提取出来
+                    cacheGroups:{
+                        commons:{
+                            chunks:'initial',
+                            name:'common',
+                            minChunks:2,// 一般都是2
+                            //minChunks:2, webpack考虑到性能优化的问题， 如果一个公共js的大小没有30kb就不拿出来作为一个请求
+                            //minChunks:1, 强制性的提取公共的包
+                            maxInitialRequests:5,
+                            minSize:0// 文件最小是0
+                        }
+                    }
+                },
+31 ： 配置图片压缩的loader ;
+
+
+32 : 技术选型：
+
+        1：  单页应用场景：
+                        1: 内部系统
+                        2：移动端
+                        3：三大框架
+        2：  单页的路由    2中    pushstate    hash
+        3：   JQ  三大框架   微前端
+        4：
+×××××××××××××××××××××                                       ×××××××××××××××××××××
+
+                    webpack 只是认识js  其余的全都是 loader
+
+×××××××××××××××××××××                                       ×××××××××××××××××××××
+
 
     ******************多页考研技术， 单页相对比较简单*****************************
 
