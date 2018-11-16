@@ -27,10 +27,19 @@ const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 // webpack 默认会去找 src下边的index.js . 如果是单页应用 。entry这个入口文件，就可以不用写了
 // output： 默认也会去dist中，默认为main.js . 如果是单页引用也可以不用写了
 // HtmlWebpackPlugin 主要作用就是插入js到制定的html
+
+const VueLoaderPlugin = require('vue-loader/lib/plugin'); //配置加载ｖｕｅ 的 loader
+
+
 let webpackConfig;
 webpackConfig = {//基本配置， 外边的配置， 在config里边。可以区分开发环境和上线环境
     module: {
-        rules: [{//配置图片压缩的loader
+        rules: [
+            { // 配置ｖｕｅ的 loader
+            test: /\.vue$/,
+            loader: 'vue-loader'
+             },
+            {//配置图片压缩的loader
             test: /\.(gif|png|jpe?g|svg)$/i,
             use: [
                 'file-loader',
@@ -136,7 +145,9 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
             suppressSuccess: true
         }),
         new ProgressBarPlugin(),//webpack打包的时候使用的进度条
-        new CleanWebpackPlugin(['dist'])
+        new CleanWebpackPlugin(['dist']),
+        new VueLoaderPlugin() // 配置ｖｕｅ的 loader
+
     ]
 };
 // 越往后优先级越低
