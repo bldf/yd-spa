@@ -2,12 +2,12 @@ import  item from  "./sync.css" ;
 import  help from  '../common';
 
 const  syncs = ()=>{
-    setTimeout(function(){
+    // setTimeout(function(){
 
 
-        document.querySelector('#app').innerHTML=`<h1 class="${item.test}"> 我的第一个单页应用 好开心啊</h1>` ;
+    //     document.querySelector('#app').innerHTML=`<h1 class="${item.test}"> 我的第一个单页应用 好开心啊</h1>` ;
 
-    },2000);
+    // },2000);
     console.log('sync.js-->',help.version) ;
     fetch('/api/test').then(response=>response.json()).then(data=>{console.log(data)})
         .catch(err=>{

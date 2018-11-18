@@ -37,7 +37,10 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
         rules: [
             { // 配置ｖｕｅ的 loader
             test: /\.vue$/,
-            loader: 'vue-loader'
+            loader: 'vue-loader',
+            options:{
+                css :MiniCssExtractPlugin.loader
+            }
              },
             {//配置图片压缩的loader
             test: /\.(gif|png|jpe?g|svg)$/i,
