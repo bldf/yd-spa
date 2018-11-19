@@ -74,9 +74,12 @@
     </el-main>
   </el-container>
 </el-container>
-
 </template>
-
+<style>
+.el-submenu{
+  background:#000 ;
+}
+</style>
 <script>
 import  styles from  "./index.css" ;
 console.log('styles===>',styles)

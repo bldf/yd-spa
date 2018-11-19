@@ -37,6 +37,8 @@ const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin'); //配置加载ｖｕｅ 的 loader
 
+const ExtractTextPlugin = require("extract-text-webpack-plugin") ; // 提取vue文件中的css
+
 
 let webpackConfig;
 webpackConfig = {//基本配置， 外边的配置， 在config里边。可以区分开发环境和上线环境
@@ -46,7 +48,8 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
             test: /\.vue$/,
             loader: 'vue-loader',
             options:{
-                css :MiniCssExtractPlugin.loader
+                // css :MiniCssExtractPlugin.loader
+                extractCSS: true
             }
              },
             {//配置图片压缩的loader
@@ -156,7 +159,8 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
         }),
         new ProgressBarPlugin(),//webpack打包的时候使用的进度条
         new CleanWebpackPlugin(['dist']),
-        new VueLoaderPlugin() // 配置ｖｕｅ的 loader
+        new VueLoaderPlugin(), // 配置ｖｕｅ的 loader
+        new ExtractTextPlugin("style.css")
 
     ]
 };
