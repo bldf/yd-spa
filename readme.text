@@ -141,3 +141,15 @@
     .loading-bg{position:fixed;width:100%;height:100%;left:0;top:0;z-index:99;background:#f0f9ff;background:-moz-linear-gradient(top,#25597b 0,rgba(203,235,255,1) 47%,rgba(161,219,255,1) 100%);background:-webkit-linear-gradient(top,rgba(240,249,255,1) 0,rgba(203,235,255,1) 47%,rgba(161,219,255,1) 100%);background:linear-gradient(to bottom,rgba(240,249,255,1) 0,rgba(203,235,255,1) 47%,rgba(161,219,255,1) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f9ff', endColorstr='#a1dbff', GradientType=0 )}
 
     </style>
+
+
+
+************************      Begin 自己扩展  **************************
+1 ： element-ui 
+借助 babel-plugin-component，我们可以只引入需要的组件，以达到减小项目体积的目的。
+
+首先，安装 babel-plugin-component：
+# For babel6
+npm i babel-plugin-component@0 -D
+
+************************      Begin 自己扩展  **************************

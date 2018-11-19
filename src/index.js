@@ -1,8 +1,9 @@
 import  {syncs} from "./components/sync/index";
 import  Vue from  "vue" ;
-import ElementUI from "element-ui" ;
+import ElementUI from "element-ui";
 import axios from "axios" ;
-// import 'element-ui/lib/theme-chalk/index.css';   
+// import 'element-ui/lib/theme-chalk/index.css';
+
 Vue.use(ElementUI);
 import router from "./router";
 

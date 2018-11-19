@@ -22,6 +22,13 @@ const loading = {
     // html:resolve('./loading.html')
     html: fs.readFileSync('./loading.html','utf-8')
 };
+if(!_modeflag){//如果是生产环境 
+    loading.linkElementUi = '<link href="/node_modules/element-ui/lib/theme-chalk/index.css" rel="stylesheet">' ;
+    loading.ElementJs = '<script src="/node_modules/element-ui/lib/index.js"></script>' ;
+}else{
+    loading.linkElementUi = '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">'; 
+    loading.ElementJs = '<script src="https://unpkg.com/element-ui/lib/index.js"></script>' ;
+}
 
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 // webpack 默认会去找 src下边的index.js . 如果是单页应用 。entry这个入口文件，就可以不用写了

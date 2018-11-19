@@ -1,22 +1,13 @@
 import Vue from 'vue' ; 
 import Router from 'vue-router' ; 
-
-
+import BasicLayout from "./components/layout/BasicLayout.vue" ;
 Vue.use(Router) ;
-
-const BasicLayout = () => import('./components/layout/BasicLayout.vue');
-
 const router = new Router({
-    routers:[{
+    routes:[{
         path:'/',
-        name:'index',
+        name:'BasicLayout',
         component:BasicLayout,
-        meta:{anonymous:true}
-    },{
-        path:'/test',
-        name:'test',
-        component:BasicLayout,
-        meta:{anonymous:true}
+       // meta:{anonymous:true}
     }]
 }) ;
 export default router ;

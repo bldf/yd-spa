@@ -1,19 +1,22 @@
 <template>
-    <div>
-        <h1>Route props</h1>
-      <ul>
-        <li><router-link to="/">/</router-link></li>
-        <li><router-link to="/hello/you">/hello/you</router-link></li>
-        <li><router-link to="/test">/test</router-link></li>
-        <li><router-link to="/dynamic/1">/dynamic/1</router-link></li>
-        <li><router-link to="/attrs">/attrs</router-link></li>
-      </ul>
-        <router-view id="app"></router-view> 
-    </div>
-    
+  <div id="apps">
+    <router-view></router-view>
+  </div>
 </template>
+
 <script>
 export default {
-    name:'App'
+  name: 'App'
 }
 </script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
