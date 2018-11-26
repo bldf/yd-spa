@@ -1,0 +1,5 @@
+.c-l-basic{
+    & header.el-header {
+        background: #6cf;
+    }
+}

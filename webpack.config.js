@@ -86,14 +86,15 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
             }, {
                 loader: 'css-loader',// 让我们可以使用import导入css文件
                 options: {
-                    modules: true,
-                    localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                    importLoaders: 1 // 设置css-loader的优先级最高
+                    // modules: true,
+                    // localIdentName: '[path][name]__[local]--[hash:base64:5]'
                 }
-            }
+            },'postcss-loader'
             ]
         }]
     },
-    devServer: {
+    devServer: {//配置测试的假数据
         before(app) {
             app.get('/api/test', (req, res) => {
                 res.json({
@@ -105,7 +106,7 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
     },
     //watch:_modeflag,//是否不死掉进程，监听代码修改自动部署， 如果使用了dev:server， 这个就没什么用
     optimization: {
-        noEmitOnErrors: false,//如果报错，不打包
+        noEmitOnErrors: true,//如果报错，不打包
         splitChunks:{// 配置公共包, 当一个js文件多次被引入的时候， 提取出来
             cacheGroups:{
                 commons:{
@@ -135,7 +136,7 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
     },
     plugins: [
         // 正常在我们开发的时候，会用到各种不同的组件， 一个单页项目就是不同的组件组成的
-        new MiniCssExtractPlugin({
+        new MiniCssExtractPlugin({//配置把webpack打包的css提取出来，不要都放在js里边
             // Options similar to the same options in webpackOptions.output
             // both options are optional
             filename: _modeflag ? "styles/[name].[contenthash:5].css" : "styles/[name].css",
@@ -152,7 +153,7 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
             }
         }),
         new InlineManifestWebpackPlugin('runtime'),
-        new WebpackBuildNotifierPlugin({
+        new WebpackBuildNotifierPlugin({//配置webpack打包完成后，提示信息
             title: "webpack 配置结果",
             logo: resolve("./img/favicon.png"),
             suppressSuccess: true
