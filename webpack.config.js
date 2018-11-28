@@ -23,7 +23,7 @@ const loading = {
     html: fs.readFileSync('./loading.html','utf-8')
 };
 if(!_modeflag){//如果是生产环境 
-    loading.linkElementUi = '<link href="/node_modules/element-ui/lib/theme-chalk/index.css" rel="stylesheet">' ;
+    loading.linkElementUi = '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">' ;
     loading.ElementJs = '<script src="/node_modules/element-ui/lib/index.js"></script>' ;
 }else{
     loading.linkElementUi = '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">'; 

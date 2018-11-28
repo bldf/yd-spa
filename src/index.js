@@ -1,4 +1,6 @@
 import  {syncs} from "./components/sync/index";
+import("./style/cssreset.css");
+import("./style/app.css");
 import  Vue from  "vue" ;
 // import ElementUI from "element-ui";
 import {
@@ -137,10 +139,10 @@ Vue.use(Footer);
 
 Vue.use(Loading.directive);
 
-import axios from "axios" ;
+// import axios from "axios" ;
 // import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(ElementUI);
+// Vue.use(ElementUI);
 import router from "./router";
 
 // const App = () => import('@/App.vue');

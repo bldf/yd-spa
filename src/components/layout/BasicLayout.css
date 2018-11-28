@@ -1,5 +1,9 @@
-.c-l-basic{
-    & header.el-header {
-        background: #6cf;
+.c-layout-b{ 
+    width:100%; height:100%;
+    & footer.el-footer {
+        background:  red;
+    }
+    & ul.el-menu-vertical-demo.el-menu {
+        overflow:  hidden;
     }
 }
