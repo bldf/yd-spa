@@ -3,10 +3,14 @@
     & footer.el-footer {
         background:  red;
     }
-    & ul.el-menu-vertical-demo.el-menu {
-        overflow:  hidden;
+    & aside>ul.el-menu-vertical-demo.el-menu {
+        border-right:  0;
     }
     & .el-header{
        background: #336b9c !important
     }
+    & .el-aside{
+        background:#545c64; 
+    }
+
 }
