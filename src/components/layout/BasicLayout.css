@@ -6,4 +6,7 @@
     & ul.el-menu-vertical-demo.el-menu {
         overflow:  hidden;
     }
+    & .el-header{
+       background: #336b9c !important
+    }
 }

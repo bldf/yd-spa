@@ -2,12 +2,18 @@
   <el-container class="c-layout-b">
     <el-header>
         <el-row :gutter="20">
-          <el-col :span="4"><div class="grid-content bg-purple">logo</div></el-col>
-          <el-col :span="16"><div class="grid-content bg-purple">内容</div></el-col>
+          <el-col :span="7">
+            <div class="grid-content bg-purple">
+              <div class="layui-logo" title="点击返回主页">
+                  <img height="36px" src="../../assets/logo.png" width="51px">
+                公司</div>
+            </div>
+            </el-col>
+          <el-col :span="13"><div class="grid-content bg-purple">内容</div></el-col>
           <el-col :span="4">
             <el-dropdown>
                 <span class="el-dropdown-link">
-                  账户：张三<i class="el-icon-arrow-down el-icon--right"></i>
+                  账户：张三12<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>修改密码</el-dropdown-item>
