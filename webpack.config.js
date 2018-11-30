@@ -60,7 +60,7 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
                     options: {
                         name:"[path][name].[ext]",
                         // emitFile:false,
-                        context:resolve(__dirname, 'src'),
+                        context:resolve(__dirname, 'src'),  
                         // name:function (a,b,c) {
                         //     console.log('开始输出了----------------------------------------------')
                         //     console.log(a);
@@ -69,7 +69,7 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
                         //     console.log('开始输出了-----------------------End-----------------------')
                         //     return a ;
                         // },
-                        publicPath:'/public ',
+                        // publicPath:'/public',
                         // useRelativePath:true,
                         // outputPath:'assets'
                     }
@@ -187,8 +187,8 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
         new ProgressBarPlugin(),//webpack打包的时候使用的进度条
         new CleanWebpackPlugin(['dist']),
         new VueLoaderPlugin(), // 配置vue的 loader
-        new CopyWebpackPlugin([
-            { from: '/dist/assets', to: '/dist/public' }
+        // new CopyWebpackPlugin([
+            // { from: '/dist/assets', to: '/dist/public' }
             // {
             //     from: {
             //         glob:'assets/**/*',
@@ -196,7 +196,7 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
             //     },
             //     to: '/public'
             // },
-        ])
+        // ])
         // new ExtractTextPlugin("style.css")
 
     ]
