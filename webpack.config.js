@@ -58,28 +58,19 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
                 {
                     loader: 'file-loader',
                     options: {
-                        name:"[path][name].[ext]",
+                        name:"[path][hash].[ext]",
                         // emitFile:false,
                         context:resolve(__dirname, 'src'),  
-                        // name:function (a,b,c) {
-                        //     console.log('开始输出了----------------------------------------------')
-                        //     console.log(a);
-                        //     console.log(b);
-                        //     console.log(c);
-                        //     console.log('开始输出了-----------------------End-----------------------')
-                        //     return a ;
-                        // },
-                        // publicPath:'/public',
+                        publicPath:'/public',
                         // useRelativePath:true,
-                        // outputPath:'assets'
+                        outputPath:'public'
                     }
                   },
                 // 'file-loader',
                 {
                     loader: 'image-webpack-loader',
                     options: {
-                        // name: _modeflag ? "assets/[name][contenthash:5].[ext]" : "assets/[name].[ext]",
-                        bypassOnDebug: true, // webpack@1.x
+                       bypassOnDebug: true, // webpack@1.x
                         disable: true, // webpack@2.x and newer
                     },
                 },
@@ -87,18 +78,18 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
         }
         ,
         
-        {//配置，图片小于多少转换为base64
-            test: /\.(png|jpg|gif|ttf|otf|svg)$/i,
-            use: [
-                {
-                    loader: 'url-loader',
-                    options: {
-                        // name:"[path][name].[ext]",
-                        limit: 10 * 1024  // 如果页面中的图片的大小小于10kb， 直接转换为base64到页面中
-                    }
-                }
-            ]
-        },
+        // {//配置，图片小于多少转换为base64
+        //     test: /\.(png|jpg|gif|ttf|otf|svg)$/i,
+        //     use: [
+        //         {
+        //             loader: 'url-loader',
+        //             options: {
+        //                 // name:"[path][name].[ext]",
+        //                 limit: 10 * 1024  // 如果页面中的图片的大小小于10kb， 直接转换为base64到页面中
+        //             }
+        //         }
+        //     ]
+        // },
         
         {
             test: /\.css$/,

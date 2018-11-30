@@ -1,0 +1,56 @@
+:root{
+    --gray:#545c64;
+}
+.c-layout-b{ 
+    width:100%; height:100%;
+    & h2.main-title {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    font-size: 1.3em;
+    color: #fff;
+}
+& .el-aside li>ul {
+    overflow: hidden;
+}
+    &>section.el-container {
+        & footer.el-footer {
+            background:  #eee;
+            position: relative;
+            & >.footer-reserved{
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                font-size: 13px;
+            }
+        }
+        &>aside>ul.el-menu-vertical-demo.el-menu {
+            border-right:  0;
+        }
+         & >.el-aside{
+            background:var(--gray); 
+        }
+           
+    }
+    
+    &>.el-header{
+       background: var(--gray);
+    }
+    & .company-logo {
+            height: 60px;
+            line-height: 56px;
+            color:#fff;
+            & img{
+                vertical-align: middle;
+            }
+    }
+    & .top-item{
+        text-align: right;
+        &>ul{
+            display: inline-block ;
+        }
+    }
+
+}

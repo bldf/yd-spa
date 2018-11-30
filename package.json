@@ -41,6 +41,7 @@
     "url-loader": "^1.1.2",
     "vue-loader": "^15.4.2",
     "vue-template-compiler": "^2.5.17",
+    "vuex": "^3.0.1",
     "webpack": "^4.21.0",
     "webpack-build-notifier": "^0.1.30",
     "webpack-cli": "^3.1.2",
