@@ -57,7 +57,7 @@
         </el-menu>
       </el-aside>
       <el-container>
-        <el-main>
+        <el-main class="v-layout-basic-content">
           <router-view></router-view>
         </el-main>
         <el-footer height="30px">

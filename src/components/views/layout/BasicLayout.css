@@ -54,3 +54,35 @@
     }
 
 }
+
+.v-layout-basic-content{
+    padding: 0;
+    position: relative;
+    &>div{
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        padding: 10px;
+    }
+}
+.el-card__header {
+    border-bottom: 0;
+     position: relative;
+    z-index: 99;
+}
+.el-card.is-never-shadow {
+    border-color: #f5f8fd;
+    height: 100%;
+}
+
+
+.el-card__body {
+    height: 100%;
+    position: absolute;
+    padding-top: 98px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
