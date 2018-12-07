@@ -12,7 +12,7 @@ span.el-range-separator {
 
 
 
-/****************************************************************   Begin  数据表格查询按钮页面样式 ****************************************************************/
+/****************************************************************   Begin  数据表格查询页面样式 ****************************************************************/
 
 
 .v-p-n-con{
@@ -25,8 +25,56 @@ span.el-range-separator {
                 padding-top: 1em;
             }
         }
+        &>section>main.el-main{
+            flex-basis:0;
+        }
+        & .v-p-n-main-table>section{
+            height:100%;
+        }
+        
 }
 
 
+/*****   Begin 表格底部刷新按钮 *****************/
+footer.el-footer.init-table-footer {
+    line-height: 36px;
+    padding: 0;
+    border: 1px solid #ebeef5;
+    border-top: 0;
+    font-size: 12px;
+    
+        
+      &  b.init-table-hzh {
+            margin-left: 1em;
+        }
 
-/****************************************************************  数据表格查询按钮页面样式    End****************************************************************/
+      &  i.el-icon-refresh {
+            padding: 5px;
+            font-weight: 900;
+            color: #027ed4;
+            text-shadow: 2px 2px 3px #948181;
+            margin-left: .5em;
+            border: 1px solid #fff;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+       & i.el-icon-refresh:hover {
+            background: #e6e6e6;
+            border: 1px solid #adadad;
+        }
+
+        & i.el-icon-refresh:active {
+            transform: rotate(91deg);
+            transition: transform .2s;
+        }
+
+       & span.init-table-nums {
+            float: right;
+            margin-right: 1em;
+        }
+}
+
+/*****    表格底部刷新按钮  End*****************/
+
+/****************************************************************  数据表格查询页面样式    End****************************************************************/

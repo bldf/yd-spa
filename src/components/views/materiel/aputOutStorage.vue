@@ -24,18 +24,44 @@
           </el-form-item>
         </el-form>
           </el-header>
-          <el-main>Main</el-main>
-          <el-footer>Footer</el-footer>
+
+
+<!-- -------------------------------- Begin 中间显示table表格使用  -------------------------------------- -->
+          <el-main class="v-p-n-main-table">
+              <el-container>
+                <el-main>
+                   <el-table
+                        v-loadmore="loadmoreFn"
+                        :data="tableData3"
+                        height="100%"
+                        border
+                        sum-text="汇总行"
+                        style="width: 100%"
+                      >
+                        <el-table-column type="selection" width="55"></el-table-column>
+                        <el-table-column prop="date" label="日期" width="180"></el-table-column>
+                        <el-table-column  show-overflow-tooltip prop="name" label="姓名" width="180"></el-table-column>
+                        <el-table-column prop="address" label="地址"></el-table-column>
+                      </el-table>
+                      <!--底部刷新组件-->
+                      <el-footer height="36px" class="init-table-footer">
+                            <el-col :span="24">
+                              <b class="init-table-hzh">汇总行<i title="刷新数据" class="el-icon-refresh"></i></b>
+                              <span class="init-table-nums">共16条</span>
+                              </el-col>
+                      </el-footer>
+                </el-main>
+                <el-footer>Footer</el-footer>
+              </el-container>
+          </el-main>
+<!-- --------------------------------   中间显示table表格使用    End-------------------------------------- -->
+          <el-footer>
+            Footerdfa
+          </el-footer>
     </el-container>
 </div>
 </template>
 <style>
-.input-with-select .el-input-group__prepend {
-  background-color: #fff;
-}
-.cell {
-  text-align: center;
-}
 </style>
 <script>
 export default {
