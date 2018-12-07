@@ -1,6 +1,8 @@
 :root{
     --gray:#545c64;
 }
+
+/************   Begin框架基础样式  *********************/
 .c-layout-b{ 
     width:100%; height:100%;
     & h2.main-title {
@@ -16,16 +18,7 @@
     overflow: hidden;
 }
     &>section.el-container {
-        & footer.el-footer {
-            background:  #eee;
-            position: relative;
-            & >.footer-reserved{
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                font-size: 13px;
-            }
-        }
+    
         &>aside>ul.el-menu-vertical-demo.el-menu {
             border-right:  0;
         }
@@ -55,6 +48,18 @@
 
 }
 
+footer.c-layout-b-footer { // 底部footer的样式
+            background:  #eee;
+            position: relative;
+            & >.footer-reserved{
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
+                font-size: 13px;
+            }
+}
+
+/************  框架基础样式 End *********************/
 .v-layout-basic-content{
     padding: 0;
     position: relative;
@@ -62,7 +67,6 @@
         height: 100%;
         position: absolute;
         width: 100%;
-        padding: 10px;
     }
 }
 .el-card__header {
@@ -82,7 +86,50 @@
     padding-top: 98px !important;
     padding-left: 20px !important;
     padding-right: 20px !important;
+     padding-bottom: 36px !important;
     top: 0;
     left: 0;
     width: 100%;
 }
+
+/*****   Begin 表格底部刷新按钮 *****************/
+footer.el-footer.init-table-footer {
+    line-height: 36px;
+    padding: 0;
+    border: 1px solid #ebeef5;
+    border-top: 0;
+    font-size: 12px;
+    
+        
+      &  b.init-table-hzh {
+            margin-left: 1em;
+        }
+
+      &  i.el-icon-refresh {
+            padding: 5px;
+            font-weight: 900;
+            color: #027ed4;
+            text-shadow: 2px 2px 3px #948181;
+            margin-left: .5em;
+            border: 1px solid #fff;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+       & i.el-icon-refresh:hover {
+            background: #e6e6e6;
+            border: 1px solid #adadad;
+        }
+
+        & i.el-icon-refresh:active {
+            transform: rotate(91deg);
+            transition: transform .2s;
+        }
+
+       & span.init-table-nums {
+            float: right;
+            margin-right: 1em;
+        }
+}
+
+/*****    表格底部刷新按钮  End*****************/

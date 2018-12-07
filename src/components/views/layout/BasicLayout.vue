@@ -60,7 +60,7 @@
         <el-main class="v-layout-basic-content">
           <router-view></router-view>
         </el-main>
-        <el-footer height="30px">
+        <el-footer class="c-layout-b-footer" height="30px">
                <div class="footer-reserved">Copyright ©  SDINT All Rights Reserved 仕点智能</div>
               <span style="position: absolute;right: 1em; top: 0;font-size: 12px;  line-height: 30px;">2018-11-30 14:05</span>
         </el-footer>
