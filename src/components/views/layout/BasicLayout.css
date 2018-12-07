@@ -1,8 +1,8 @@
 :root{
     --gray:#545c64;
 }
+/****************************************************************    Begin 框架基础样式  ****************************************************************/
 
-/************   Begin框架基础样式  *********************/
 .c-layout-b{ 
     width:100%; height:100%;
     & h2.main-title {
@@ -14,24 +14,16 @@
     font-size: 1.3em;
     color: #fff;
 }
-& .el-aside li>ul {
-    overflow: hidden;
+
 }
-    &>section.el-container {
-    
-        &>aside>ul.el-menu-vertical-demo.el-menu {
+
+ .c-layout-b-menu {
             border-right:  0;
         }
-         & >.el-aside{
-            background:var(--gray); 
-        }
-           
-    }
-    
-    &>.el-header{
+.c-layout-b-header,.c-layout-b-aside{
        background: var(--gray);
-    }
-    & .company-logo {
+}
+.c-layout-b-company-logo {/************   logo图标 *********************/
             height: 60px;
             line-height: 56px;
             color:#fff;
@@ -39,16 +31,16 @@
                 vertical-align: middle;
             }
     }
-    & .top-item{
+ .c-layout-b-top-item{/************   顶部账户和帮助 *********************/
         text-align: right;
         &>ul{
             display: inline-block ;
         }
-    }
-
 }
-
-footer.c-layout-b-footer { // 底部footer的样式
+.c-layout-b-aside li>ul {/************   左侧ul清楚横向滚动条 *********************/
+    overflow: hidden;
+}
+.c-layout-b-footer { /************   底部footer的样式*********************/
             background:  #eee;
             position: relative;
             & >.footer-reserved{
@@ -59,16 +51,22 @@ footer.c-layout-b-footer { // 底部footer的样式
             }
 }
 
-/************  框架基础样式 End *********************/
+
+
+
+
+
+/****************************************************************    框架基础样式 End  ****************************************************************/
+
+
+
+
 .v-layout-basic-content{
     padding: 0;
     position: relative;
-    &>div{
-        height: 100%;
-        position: absolute;
-        width: 100%;
-    }
 }
+
+
 .el-card__header {
     border-bottom: 0;
      position: relative;

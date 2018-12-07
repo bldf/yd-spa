@@ -1,15 +1,15 @@
 <template>
   <el-container class="c-layout-b">
-    <el-header>
+    <el-header class="c-layout-b-header">
         <el-row :gutter="20">
           <el-col :span="10">
-              <div class="company-logo" title="点击返回主页"> 
+              <div class="c-layout-b-company-logo" title="点击返回主页"> 
                 <img height="36px"  src="../../../assets/logo.png" width="51px">
                 <span style="padding-left:2mm;"> 仕点智能科技有限公司</span>
               </div>
             </el-col>
           <el-col :span="7" style="height:1px;"></el-col>
-          <el-col class="top-item" style="padding:0;" :span="7">
+          <el-col class="c-layout-b-top-item" style="padding:0;" :span="7">
             <el-menu
               
               mode="horizontal"
@@ -29,10 +29,10 @@
         </el-row>
     </el-header>
     <el-container>
-      <el-aside width="140px">
+      <el-aside class="c-layout-b-aside" width="140px">
         <el-menu
           default-active="2"
-          class="el-menu-vertical-demo"
+          class="c-layout-b-menu"
          
           background-color="#545c64"
           text-color="#fff"
@@ -56,7 +56,7 @@
           </el-menu-item>
         </el-menu>
       </el-aside>
-      <el-container>
+      <el-container class="c-layout-b-container">
         <el-main class="v-layout-basic-content">
           <router-view></router-view>
         </el-main>
