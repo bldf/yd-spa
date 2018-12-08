@@ -11,7 +11,6 @@
           <el-col :span="7" style="height:1px;"></el-col>
           <el-col class="c-layout-b-top-item" style="padding:0;" :span="7">
             <el-menu
-              
               mode="horizontal"
               background-color="#545c64"
               text-color="#fff"
@@ -31,9 +30,8 @@
     <el-container>
       <el-aside class="c-layout-b-aside" width="140px">
         <el-menu
-          default-active="2"
+          default-active="1-1"
           class="c-layout-b-menu"
-         
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
@@ -57,7 +55,7 @@
         </el-menu>
       </el-aside>
       <el-container class="c-layout-b-container">
-        <el-main class="v-layout-basic-content">
+        <el-main>
           <router-view></router-view>
         </el-main>
         <el-footer class="c-layout-b-footer" height="30px">

@@ -20,7 +20,13 @@ const router = new Router({
         // 当 /user/:id/profile 匹配成功，
         // UserProfile 会被渲染在 User 的 <router-view> 中
         path: '/materiel/aputOutStorage',
-        component: () => import("./components/views//materiel/aputOutStorage.vue")
+        component: () => import("./components/views/materiel/aputOutStorage.vue")
+      },
+      {
+        // 当 /user/:id/profile 匹配成功，
+        // UserProfile 会被渲染在 User 的 <router-view> 中
+        path: '/materiel/mt',
+        component: () => import("./components/views/module/tabs.vue")
       }
     //   {
     //     // 当 /user/:id/posts 匹配成功
@@ -28,7 +34,6 @@ const router = new Router({
     //     path: 'posts',
     //     component: UserPosts
     //   }
-    
     ]
     }]
 }) ;    

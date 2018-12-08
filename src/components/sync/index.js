@@ -15,7 +15,15 @@ const  syncs = ()=>{
             console.log('访问地址错误啦') ;
             //  发短信
             // navigator.sendBeacon('www.aaa.com/a.gif?aa=');
-        })
+        });
+
+        fetch(' /user/queryUserAuthority').then(response=>response.json()).then(data=>{console.log(data)})
+        .catch(err=>{
+            console.log('访问地址错误啦') ;
+            //  发短信
+            // navigator.sendBeacon('www.aaa.com/a.gif?aa=');
+        });
+       
 }
 const isArray = args=>{
     console.log('yaoxinglin789897879789879798798') ;

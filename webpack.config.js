@@ -40,6 +40,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin'); //配置加载ｖｕ�
 // const ExtractTextPlugin = require("extract-text-webpack-plugin") ; // 提取vue文件中的css
 
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // 配置提取公共图片
+
+
 let webpackConfig;
 webpackConfig = {//基本配置， 外边的配置， 在config里边。可以区分开发环境和上线环境
     module: {
@@ -110,16 +112,6 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
             },'postcss-loader'
             ]
         }]
-    },
-    devServer: {//配置测试的假数据
-        before(app) {
-            app.get('/api/test', (req, res) => {
-                res.json({
-                    code: '200',
-                    message: {aa: "23中的   "}
-                });
-            });
-        }
     },
     //watch:_modeflag,//是否不死掉进程，监听代码修改自动部署， 如果使用了dev:server， 这个就没什么用
     optimization: {
