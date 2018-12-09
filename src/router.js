@@ -11,12 +11,20 @@ const router = new Router({
         component:BasicLayout,
        // meta:{anonymous:true}
        children:[{
+        path: "dashboard",
+        component: () => import("./components/views/Dashboard.vue"),
+      },{
+        path: "/system/user",
+        component: () => import("./components/views/system/user.vue"),
+      },{
+        path: "/record/outList",/* 物资出门记录 */
+        component: () => import("./components/views/record/outList.vue"),
+      },{
         // 当 /user/:id/profile 匹配成功，
         // UserProfile 会被渲染在 User 的 <router-view> 中
         path: 'materiel',
         component: () => import("./components/views/materiel/aputInStorage.vue")
-      },
-      {
+      },{
         // 当 /user/:id/profile 匹配成功，
         // UserProfile 会被渲染在 User 的 <router-view> 中
         path: '/materiel/aputOutStorage',

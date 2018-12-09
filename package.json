@@ -50,6 +50,7 @@
     "yargs-parser": "^11.0.0"
   },
   "dependencies": {
+    "@antv/g2": "^3.4.5",
     "axios": "^0.18.0",
     "element-ui": "^2.4.10",
     "vue": "^2.5.17",

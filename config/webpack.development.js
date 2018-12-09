@@ -4,6 +4,7 @@ module.exports ={
             filename: "scripts/[name].bundles.js"
         },
         devServer: {//配置测试的假数据
+            port:4000,
             before(app) {
                 test(app);
             }

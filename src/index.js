@@ -4,6 +4,10 @@ import("./style/app.css");
 import Vue from "vue";
 import store from "./store";
 import ElementUI from "element-ui";
+import {
+  map as _map
+} from "lodash-es";
+Vue.prototype.__map = _map ;
 // import {
 //   Pagination,
 //   Dialog,

@@ -26,6 +26,7 @@
             </el-form>
           </el-header>
 
+
 <!-- -------------------------------- Begin 中间显示table表格使用  -------------------------------------- -->
           <el-main class="v-p-n-main-table">
               <el-container>
@@ -35,7 +36,7 @@
                         :data="m$tableData"
                         height="100%"
                         border
-                        @selection-change	= "f$tableDataChangeFn"
+                        @selection-change	= "tableDataChangeFn"
                         style="width: 100%"
                       >
                         <el-table-column type="selection" ></el-table-column>
@@ -308,7 +309,7 @@ export default {
     searchFn() {
       console.log(this.searchInfo);
     },
-    f$tableDataChangeFn(r){
+    tableDataChangeFn(r){
       this.m$le = r.length ;
     },
     loadmoreFn() {

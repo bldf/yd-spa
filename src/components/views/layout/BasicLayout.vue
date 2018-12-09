@@ -24,34 +24,61 @@
               <el-menu-item index="1">帮助</el-menu-item>
             </el-menu>
           </el-col>
-          <h2 class="main-title">物料管理<span>•出库记录</span></h2>
+          <h2 class="main-title">
+               <span v-for="menuName in __map($route.matched,'meta.menuName')" :key="menuName">{{ menuName }}</span>
+             <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
+                                    <el-breadcrumb-item  v-for="menuName in __map($route.matched,'meta.menuName')" :key="menuName">{{ menuName }}</el-breadcrumb-item>
+                        </el-breadcrumb> -->
+             <!-- <el-breadcrumb separator-class="el-icon-arrow-right">
+                                    <el-breadcrumb-item  v-for="menuName in map($route.matched,'meta.menuName')" :key="menuName">{{ menuName }}</el-breadcrumb-item>
+                        </el-breadcrumb> -->
+            </h2>
         </el-row>
     </el-header>
     <el-container>
-      <el-aside class="c-layout-b-aside" width="140px">
+      <el-aside class="c-layout-b-aside" width="155px">
         <el-menu
-          default-active="1-1"
+          :default-active="$route.path"
+          :router="true"
           class="c-layout-b-menu"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
         >
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-submenu>
-          <el-menu-item index="2">
+         <el-menu-item index="/dashboard">
             <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
+            <span slot="title">首页</span>
           </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
+          
+          <el-submenu index="/system">
+            <template slot="title">
+              <i class="el-icon-setting"></i>
+              <span>权限管理</span>
+            </template>
+              <el-menu-item index="/system/user">
+                <i class="el-icon-menu"></i>
+                 <span slot="title">用户管理</span>
+              </el-menu-item>
+              <el-menu-item index="/system/role">
+                 <i class="el-icon-menu"></i>
+               <span slot="title"> 角色管理</span>
+                </el-menu-item>
+              <el-menu-item index="/system/resourcesList">
+                 <i class="el-icon-menu"></i>
+                <span slot="title">资源管理</span>
+                </el-menu-item>
+          </el-submenu>
+
+        <el-menu-item index="/record/outList">
+            <i class="el-icon-tickets"></i>
+            <span slot="title">物资出门记录</span>
           </el-menu-item>
+
+         <el-menu-item index="/record/inList">
+            <i class="el-icon-tickets"></i>
+            <span slot="title">访客记录</span>
+          </el-menu-item>
+
         </el-menu>
       </el-aside>
       <el-container class="c-layout-b-container">
@@ -68,6 +95,8 @@
 </template>
 <script>
 import("./BasicLayout.css");
+// const {map as _map} = import('lodash-es'); 
+// console.log('map-------------',_map);
 export default {
   name: "App",
   data() {
