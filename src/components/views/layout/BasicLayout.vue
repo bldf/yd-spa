@@ -16,7 +16,7 @@
               text-color="#fff"
               active-text-color="#ffd04b">
               <el-submenu index="2">
-                <template slot="title">账户：张三</template>
+                <template>账户：张三</template>
                 <el-menu-item index="2-1">修改密码</el-menu-item>
                 <el-menu-item index="2-2">注销</el-menu-item>
                 <el-menu-item index="2-3">基本信息</el-menu-item>
@@ -47,36 +47,36 @@
         >
          <el-menu-item index="/dashboard">
             <i class="el-icon-menu"></i>
-            <span slot="title">首页</span>
+            <span>首页</span>
           </el-menu-item>
           
           <el-submenu index="/system">
-            <template slot="title">
+            <template  slot="title">
               <i class="el-icon-setting"></i>
               <span>权限管理</span>
             </template>
               <el-menu-item index="/system/user">
                 <i class="el-icon-menu"></i>
-                 <span slot="title">用户管理</span>
+                 <span>用户管理</span>
               </el-menu-item>
               <el-menu-item index="/system/role">
                  <i class="el-icon-menu"></i>
-               <span slot="title"> 角色管理</span>
+               <span> 角色管理</span>
                 </el-menu-item>
               <el-menu-item index="/system/resourcesList">
                  <i class="el-icon-menu"></i>
-                <span slot="title">资源管理</span>
+                <span>资源管理</span>
                 </el-menu-item>
           </el-submenu>
 
         <el-menu-item index="/record/outList">
             <i class="el-icon-tickets"></i>
-            <span slot="title">物资出门记录</span>
+            <span>入库记录</span>
           </el-menu-item>
 
          <el-menu-item index="/record/inList">
             <i class="el-icon-tickets"></i>
-            <span slot="title">访客记录</span>
+            <span>出库记录</span>
           </el-menu-item>
 
         </el-menu>

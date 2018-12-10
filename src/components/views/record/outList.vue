@@ -32,7 +32,7 @@
               <el-container>
                 <el-main>
                    <el-table
-                        v-loadmore="loadmoreFn"
+                        v-loadmore="f$loadmoreFn"
                         :data="m$tableData"
                         highlight-current-row
                         height="100%"
@@ -55,12 +55,12 @@
                          <el-table-column  show-overflow-tooltip prop="createdAt" label="发起日期" width="140"></el-table-column>
                           <el-table-column  show-overflow-tooltip prop="fxdate" label="放行日期" width="140"></el-table-column>
                         <el-table-column label="状态" width="120">
-                            <template slot-scope="scope">
-                                 <el-tag v-if="scope.row.ftype == 1" type="warning" size="medium">未放行</el-tag>
-                                  <el-tag v-else-if="scope.row.ftype == 2" size="medium">已放行</el-tag>
-                                 <el-tag v-else-if="scope.row.ftype == 3" type="danger"  size="medium">拒绝放行</el-tag>
-                                 <el-tag v-else-if="scope.row.ftype == 4" type="success"  size="medium">结束</el-tag>
-                            </template>
+                          <template slot-scope="scope">
+                                <el-tag v-if="scope.row.ftype == 1" type="warning" size="medium">未放行</el-tag>
+                                <el-tag v-else-if="scope.row.ftype == 2" size="medium">已放行</el-tag>
+                                <el-tag v-else-if="scope.row.ftype == 3" type="danger"  size="medium">拒绝放行</el-tag>
+                                <el-tag v-else-if="scope.row.ftype == 4" type="success"  size="medium">结束</el-tag>
+                          </template>
                         </el-table-column>
                       </el-table>
                 </el-main>
@@ -98,9 +98,7 @@
 </style>
 <script>
 import { Loading } from 'element-ui';
-
 import { forEach } from 'lodash-es';
-// 
 export default {
   name: "user",
   data() {
@@ -122,62 +120,9 @@ export default {
     };
   },
   mounted() {
-    this.query();
+    this.f$refresh();
   },
   methods: {
-    searchFn() {
-      console.log(this.searchInfo);
-    },
-    f$tableDataChangeFn(r){
-      m$selectedRows=r,
-      this.m$le = r.length ;
-    },
-    loadmoreFn() {
-      if(this.m$tableData.length>=this.m$page.total){
-          this.$message({
-          message: '没有更多数据',
-          center: true
-        });
-      }else{
-        ++this.m$page.page ;
-        const loading =  Loading.service({background:'transparent',target:'div.is-scrolling-none',text:'加载中'});
-            var $t  = this ;
-            console.log('开始加载了 ')
-            fetch('/outRecord/getoutRecordMsg.do',{method:'post', headers: {
-              'content-type': 'application/json'
-            },body:JSON.stringify({
-              page:this.m$page.page,
-              rows:this.m$page.rows
-            })}).then(response=>response.json()).then(data=>{
-                loading.close();
-                this.m$page.total = data.total ;
-                forEach(data.rows,d=>{
-                    $t.m$tableData.push(d);
-                });
-            }).catch(()=>{
-                loading.close();
-            })
-      }
-      
-    },
-    query() {
-
-    const loading =  Loading.service({background:'transparent',target:'div.is-scrolling-none',text:'加载中'});
-    var $t  = this ;
-    fetch('/outRecord/getoutRecordMsg.do',{method:'post', headers: {
-      'content-type': 'application/json'
-    },body:JSON.stringify({
-      page:this.m$page.page,
-      rows:this.m$page.rows
-    })}).then(response=>response.json()).then(data=>{
-        loading.close();
-        $t.m$tableData = data.rows ;
-        $t.m$page.total = data.total ;
-    }).catch(()=>{
-        loading.close();
-    })
-
-    },
     edit() {
       this.m$dialogVisible = true;
     },
