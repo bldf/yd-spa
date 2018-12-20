@@ -1,32 +1,40 @@
 <template class="show-time">
   <el-container class="v-p-n-con">
           <el-header style="height:auto;">
-            <el-form :inline="true"  ref="searchInfo" :model="m$searchInfo" class="demo-form-inline">
-              <el-form-item prop="user" label="发起账户">
+             <!-- <el-form :inline="true" status-icon ref="m$diaInfo" :model="m$diaInfo" label-width="80px"> -->
+            <el-form :inline="true" status-icon  ref="m$searchInfo" :model="m$searchInfo">
+              <el-form-item  label="账户">
                 <el-input v-model="m$searchInfo.user"></el-input>
               </el-form-item>
-              <el-form-item prop="flag" label="状态">
+              <el-form-item  label="用户名">
+                <el-input v-model="m$searchInfo.username"></el-input>
+              </el-form-item>
+              <el-form-item label="供应商">
                 <el-select v-model="m$searchInfo.flag">
-                  <el-option label="已放行" value="0"></el-option>
-                  <el-option label="拒绝放行" value="1"></el-option>
-                  <el-option label="结束" value="2"></el-option>
+                  <el-option label="供应商1" value="0"></el-option>
+                  <el-option label="供应商2" value="1"></el-option>
+                  <el-option label="供应商3" value="2"></el-option>
                 </el-select>
               </el-form-item>
-              <el-form-item  prop="createTime" label="放行日期">
+               <el-form-item  label="是否启用">
+                <el-radio-group v-model="m$searchInfo.enable">
+                  <el-radio label="启用"></el-radio>
+                  <el-radio label="禁用"></el-radio>
+                </el-radio-group>
+              </el-form-item>
+              <el-form-item  label="创建日期">
                 <el-date-picker   type="daterange"  v-model="m$searchInfo.createTime"  align="right" unlink-panels range-separator="至"
-                  start-placeholder="放行开始日期"
-                  end-placeholder="放行结束日期"
+                  start-placeholder="创建开始日期"
+                  end-placeholder="创建结束日期"
                   :picker-options="$store.state.dateRangePickerOptions"
                 ></el-date-picker>
               </el-form-item>
               <el-form-item>
-                <el-button type="info" @click="resetForm('m$searchInfo')" title="清空" icon="el-icon-zoom-out" circle></el-button>
-                <el-button type="primary" @click="searchFn" title="查询" icon="el-icon-search" circle></el-button>
+                <el-button type="info" @click="f$resetForm('m$searchInfo')" title="清空" icon="el-icon-zoom-out" circle></el-button>
+                <el-button type="primary" @click="f$search('查询成功')" title="查询" icon="el-icon-search" circle></el-button>
               </el-form-item>
             </el-form>
           </el-header>
-
-
 <!-- -------------------------------- Begin 中间显示table表格使用  -------------------------------------- -->
           <el-main class="v-p-n-main-table">
               <el-container>
@@ -36,30 +44,20 @@
                         :data="m$tableData"
                         highlight-current-row
                         height="100%"
+                        border
                         @selection-change	= "f$tableDataChangeFn"
                         style="width: 100%"
                       >
-                      <el-table-column type="expand">
-                            <template slot-scope="props">
-                                <el-form label-position="left" inline class="demo-table-expand">
-                                  <el-form-item v-for="d in JSON.parse(props.row.finfo)" :key="d.id" width="140" :label="d.key">
-                                      <span>{{d.value}}</span>
-                                  </el-form-item>
-                                </el-form>
-                            </template>
-                      </el-table-column>    
-
-                        <el-table-column prop="flogin" label="发起账户" width="180"></el-table-column>
-                        <el-table-column  show-overflow-tooltip prop="fname" label="用户名" width="180"></el-table-column>
-                        <el-table-column prop="describes" label="发起描述"></el-table-column>
-                         <el-table-column  show-overflow-tooltip prop="createdAt" label="发起日期" width="140"></el-table-column>
-                          <el-table-column  show-overflow-tooltip prop="fxdate" label="放行日期" width="140"></el-table-column>
-                        <el-table-column label="状态" width="120">
+                       <el-table-column type="selection" ></el-table-column>
+                        <el-table-column prop="username" label="账户" width="180"></el-table-column>
+                        <el-table-column  show-overflow-tooltip prop="supplier" label="供应商名称" width="180"></el-table-column>
+                        <el-table-column prop="address" label="地址"></el-table-column>
+                        <el-table-column  show-overflow-tooltip prop="email" label="邮件" width="140"></el-table-column>
+                        <el-table-column  show-overflow-tooltip prop="phone" label="电话" width="140"></el-table-column>
+                        <el-table-column  show-overflow-tooltip prop="crspd" label="对应人员" width="140"></el-table-column>
+                        <el-table-column label="是否启用" width="120">
                           <template slot-scope="scope">
-                                <el-tag v-if="scope.row.ftype == 1" type="warning" size="medium">未放行</el-tag>
-                                <el-tag v-else-if="scope.row.ftype == 2" size="medium">已放行</el-tag>
-                                <el-tag v-else-if="scope.row.ftype == 3" type="danger"  size="medium">拒绝放行</el-tag>
-                                <el-tag v-else-if="scope.row.ftype == 4" type="success"  size="medium">结束</el-tag>
+                               <el-switch @change="changeEnable(scope.row)" v-model="scope.row.enable"></el-switch>
                           </template>
                         </el-table-column>
                       </el-table>
@@ -68,92 +66,99 @@
                    <!--底部刷新组件-->
                       <el-footer height="36px" class="init-table-footer">
                             <el-col :span="24">
-                              <b class="init-table-hzh">汇总行<i title="刷新数据" class="el-icon-refresh"></i></b>
+                              <b class="init-table-hzh">汇总行<i title="刷新数据" @click="f$refresh('更新成功')" class="el-icon-refresh"></i></b>
                               <span class="init-table-nums">共{{m$page.total}}条</span>
-                              </el-col>
+                            </el-col>
                       </el-footer>
                 </el-footer>
               </el-container>
           </el-main>
+          <el-footer height="50px" style="line-height:50px">
+            <el-button type="primary" @click="f$openDialog('增加用户')" title="增加账户">增加</el-button>
+            <el-button type="primary" :disabled="m$le!==1" @click="f$openDialog('修改用户',m$selectedRows[0])"  title="修改账户">修改</el-button>
+            <el-button type="danger" :disabled="!m$le>0" @click="f$tableRemove"   title="删除账户">删除</el-button>
+          </el-footer>
+
+                   
+<!-- --------------------------------  Begin    弹出dialog   -------------------------------------- -->
+<el-dialog :title="m$diaTitle"   :visible.sync="m$dialogVisible">
+      <el-form :inline="true" status-icon ref="m$diaInfo" :model="m$diaInfo" label-width="80px">
+        <el-form-item prop="userName"  :rules="[{ck:'fk',validator:this.f$ck,trigger:'blur'}]"  label="姓名">
+          <el-input v-model="m$diaInfo.userName" placeholder="必填"></el-input>
+        </el-form-item>
+         <el-form-item prop="job" :rules="[{ck:'fk',validator:this.f$ck,trigger:'blur'}]" label="职务">
+          <el-input v-model="m$diaInfo.job"  placeholder="必填"></el-input>
+        </el-form-item>
+         <el-form-item  prop="sex" :rules="[{ck:'fk',validator:this.f$ck,trigger:'change'}]" label="部门">
+          <el-select v-model="m$diaInfo.sex" placeholder="必填">
+            <el-option label="部门1" value="1"></el-option>
+            <el-option label="部门2" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+       
+        <el-form-item  prop="sex2"  :rules="[{ck:'fk',validator:this.f$ck,trigger:'change'}]" label="性别">
+          <el-select v-model="m$diaInfo.sex2" placeholder="必填">
+            <el-option label="男" value="1"></el-option>
+            <el-option label="女" value="2"></el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item  prop="pwd2" :rules="[{ck:'fk',validator:this.f$ck,trigger:'blur'}]" label="工位">
+          <el-input v-model="m$diaInfo.pwd2" type="password" placeholder="必填"></el-input>
+        </el-form-item>
+        <el-form-item  :rules="[{ck:'sj',validator:this.f$ck,trigger:'blur'}]"  label="手机号码">
+          <el-input placeholder="选题" v-model="m$diaInfo.phone" class="input-with-select"></el-input>
+        </el-form-item>
+        <el-form-item   prop="email" :rules="[{ck:'el',validator:this.f$ck,trigger:'blur'}]" label="电子邮件">
+          <el-input v-model="m$diaInfo.email" placeholder="选题"></el-input>
+        </el-form-item>
+        <el-form-item prop="remark"  :rules="[{ck:'fk',validator:this.f$ck,trigger:'blur'}]" label="备注">
+          <el-input placeholder="选题" v-model="m$diaInfo.remark" class="input-with-select"></el-input>
+        </el-form-item>
+        <!-- <el-form-item label="头像">
+          <el-upload
+            action="this.$http.defaults.baseURL+'/oss/upload'"
+            :data="{bucketName:bucketName}"
+            :headers="{Authorization:'Bearer '+$store.state.token}"
+            :on-remove="onRemoveFile"
+            list-type="picture-card"
+          >
+            <i class="el-icon-plus"></i>
+          </el-upload>
+        </el-form-item> -->
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="m$dialogVisible = false">取 消</el-button>
+        <el-button @click="f$resetForm('m$diaInfo')" >重置</el-button>
+        <el-button @click="f$submitForm('m$diaInfo')" type="primary">确 定</el-button>
+      </div>
+    </el-dialog>
+
+<!-- --------------------------------   弹出dialog    End-------------------------------------- -->
+
     </el-container>
 </template>
-<style>
-  .input-with-select .el-input-group__prepend {
-    background-color: #fff;
-  }
-  .cell {
-    text-align: center;
-  }
-  .demo-table-expand {
-    font-size: 0;
-  }
-  .demo-table-expand label {
-    color: #99a9bf;
-  }
-  .demo-table-expand .el-form-item {
-    margin-right: 0;
-    margin-bottom: 0;
-    width: 33.33333%;
-  }
-</style>
 <script>
-import { Loading } from 'element-ui';
-import { forEach } from 'lodash-es';
-export default {
-  name: "user",
-  data() {
-    return {
-      m$searchInfo: {},
-      m$diaInfo: {},
-      m$le:0,
-      m$selectedRows: [],
-      m$dialogVisible: false,
-      m$tableData: [],
-      m$page: { page: 1, rows: 35, total: ''},
-      other:{},
-      state: null,
-      dateRange: null,
-      test: null,
-      test1: null,
-      bucketName: "public",
-    
-    };
-  },
-  mounted() {
-    this.f$refresh();
-  },
-  methods: {
-    edit() {
-      this.m$dialogVisible = true;
-    },
-    onSelectionChange(rows) {
-      this.selectedRows = rows.map(item => item.userId);
-    },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
-      },
-    remove() {
-      this.$confirm(
-        `此操作将永久删除, 是否继续?</br>共用户【${
-          this.selectedRows.length
-        }】个`,
-        "删除确认",
-        {
-          confirmButtonText: "确定",
-          cancelButtonText: "取消",
-          dangerouslyUseHTMLString: true,
-          type: "warning"
-        }
-      ).then(() => {
-          this.$message({
-            type: 'success',
-            message: '删除成功!'
-          });
+import { merge } from "lodash-es";
+import  {table}  from "../../common/el-init.js";
+export default merge(table,{
+  name:'outList',
+  methods:{
+    changeEnable(d){//修改状态是否启用，此处应该发送ajax
+      let msg = d.enable ? '启用':'禁用';
+      let type = d.enable ? 'success':'info';
+     this.$message({
+          message: `${msg}成功`,
+          center: true,
+          type
         });
-    },
-    onRemoveFile(file) {
-      // this.$http.delete(`/oss/remove/${this.bucketName}/${file.response}`);
     }
+  },
+  mounted(){
+    this.m$tableUrl = '/users.do';
+    this.f$refresh();
+    this.m$tableAddUrl='' ;
+    this.m$tableUpUrl='' ;
+    this.m$tableDelUrl='' ;
   }
-};
+  });
 </script>

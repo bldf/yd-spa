@@ -1,3 +1,5 @@
+import { __exportStar } from "tslib";
+
 class AjaxFetch{
 	constructor(opts, params){
 		const isUrl = typeof opts === 'string';

@@ -1,13 +1,17 @@
 import { syncs } from "./components/sync/index";
+import { http } from "./components/common/util.js";
 import("./style/cssreset.css");
 import("./style/app.css");
 import Vue from "vue";
 import store from "./store";
 import ElementUI from "element-ui";
 import {
-  map as _map
+  map as _map,
+  assignIn as __assignIn
 } from "lodash-es";
 Vue.prototype.__map = _map ;
+Vue.prototype.http = http ;
+Vue.prototype.assignIn = __assignIn ;
 // import {
 //   Pagination,
 //   Dialog,
@@ -146,10 +150,9 @@ Vue.prototype.__map = _map ;
 
 // import axios from "axios" ;
 // import 'element-ui/lib/theme-chalk/index.css';
-Vue.directive('loadmore', {//添加指令
+Vue.directive('loadmore', {//添加滚动加载指令指令
   bind(el, binding) {
     const selectWrap = el.querySelector('.el-table__body-wrapper');
-    // var RETIME ={date:new Date()};
     var RETIME  = new Date(),ifTop=0;//用于判断是往上滑还是往下滑    
     selectWrap.addEventListener('scroll', function () {
       let sign = 10;
@@ -173,10 +176,10 @@ import App from "./App.vue";
 console.log(App)
 import syncBanner from "./components/banner/index.js";
 // webpackChunkName:"async-banner" 下边这行这个是魔法注释，打包的时候的命名
-import(/* webpackChunkName:"async-banner"*/"./components/banner/index.js").then(_ => {
-  _.default.init();
-  console.log('调用了第二次成功了')
-});
+// import(/* webpackChunkName:"async-banner"*/"./components/banner/index.js").then(_ => {
+//   _.default.init();
+//   console.log('调用了第二次成功了')
+// });
 console.log(router);
 new Vue({
   router,
