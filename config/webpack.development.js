@@ -5,7 +5,7 @@ module.exports ={
             filename: "scripts/[name].bundles.js"
         },
         devServer: {//配置测试的假数据
-            port:8080,
+            port:8088,
             before(app) {
                 tableRouter(app) ;//获取数据表格所需要的测试数据
                 test(app);

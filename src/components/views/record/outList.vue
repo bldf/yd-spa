@@ -44,7 +44,7 @@
                         :data="m$tableData"
                         highlight-current-row
                         height="100%"
-                        sort-change="f$sortChange"
+                        @sort-change="f$sortChange"
                         border
                         @selection-change	= "f$tableDataChangeFn"
                         style="width: 100%"

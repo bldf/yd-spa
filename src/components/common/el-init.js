@@ -172,9 +172,8 @@ const table = {
               });
         },
         f$sortChange( column, prop, order ){
-            console.log('999999999999999999999999999')
-            alert(999)
-                console.log('column, prop, order ',column, prop, order )
+            // console.log('column, prop, order ',column, prop, order )
+            console.log('排序啦')
         }
     }
 }
