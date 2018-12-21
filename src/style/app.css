@@ -21,9 +21,9 @@ span.el-range-separator {
         height: 100%;
         flex-basis:0;
 
-         &>.el-header{
-                padding-top: 1em;
-         }
+            &>.el-header{
+                    padding-top: 1em;
+            }
 
         & main.el-main{
             flex-basis:0;
@@ -81,5 +81,28 @@ footer.el-footer.init-table-footer {
 }
 
 /*****    表格底部刷新按钮  End*****************/
+/*****  Begin  中间table切换的样式 *****************/
+.lay-con-tab{
+    height: 100%;
+& .el-tabs__header.is-top {
+    padding: 0 1em;
+}
 
+& .el-tabs.el-tabs--top {
+    height: 100%;
+}
+
+& .el-tabs__content {
+    &>div{
+        height: 100%;
+        & .v-p-n-con>.el-header{
+            padding-top: 0 ;
+        }
+        }
+    height: 100%;
+    margin-top: -55px;
+    padding-top: 55px;
+}
+/*****    中间table切换的样式  End*****************/
+}
 /****************************************************************  数据表格查询页面样式    End****************************************************************/

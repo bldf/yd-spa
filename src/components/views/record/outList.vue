@@ -44,6 +44,7 @@
                         :data="m$tableData"
                         highlight-current-row
                         height="100%"
+                        sort-change="f$sortChange"
                         border
                         @selection-change	= "f$tableDataChangeFn"
                         style="width: 100%"
@@ -51,8 +52,8 @@
                        <el-table-column type="selection" ></el-table-column>
                         <el-table-column prop="username" label="账户" width="180"></el-table-column>
                         <el-table-column  show-overflow-tooltip prop="supplier" label="供应商名称" width="180"></el-table-column>
-                        <el-table-column prop="address" label="地址"></el-table-column>
-                        <el-table-column  show-overflow-tooltip prop="email" label="邮件" width="140"></el-table-column>
+                        <el-table-column  prop="address" label="地址"></el-table-column>
+                        <el-table-column  show-overflow-tooltip prop="email"  sortable="custom" label="入库日期" width="140"></el-table-column>
                         <el-table-column  show-overflow-tooltip prop="phone" label="电话" width="140"></el-table-column>
                         <el-table-column  show-overflow-tooltip prop="crspd" label="对应人员" width="140"></el-table-column>
                         <el-table-column label="是否启用" width="120">
