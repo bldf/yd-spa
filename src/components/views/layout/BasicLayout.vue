@@ -36,51 +36,61 @@
         </el-row>
     </el-header>
     <el-container>
-      <el-aside class="c-layout-b-aside" width="155px">
-        <el-menu
-          :default-active="$route.path"
-          :router="true"
-          class="c-layout-b-menu"
-          background-color="#545c64"
-          text-color="#fff"
-          active-text-color="#ffd04b"
-        >
-         <el-menu-item index="/dashboard">
-            <i class="el-icon-menu"></i>
-            <span>首页</span>
-          </el-menu-item>
-          
-          <el-submenu index="/system">
-            <template  slot="title">
-              <i class="el-icon-setting"></i>
-              <span>权限管理</span>
-            </template>
-              <el-menu-item index="/system/user">
-                <i class="el-icon-menu"></i>
-                 <span>用户管理</span>
-              </el-menu-item>
-              <el-menu-item index="/system/role">
-                 <i class="el-icon-menu"></i>
-               <span> 角色管理</span>
-                </el-menu-item>
-              <el-menu-item index="/system/resourcesList">
-                 <i class="el-icon-menu"></i>
-                <span>资源管理</span>
-                </el-menu-item>
-          </el-submenu>
+      <el-container class="c-layout-b-aside">
+        <el-main>
+            <el-aside :class="isCollapse?'on':''"  :width="isCollapse?'55px':'155px'">
+                <el-menu
+                  :default-active="$route.path"
+                  :router="true"
+                  :collapse="isCollapse"
+                  class="c-layout-b-menu"
+                  background-color="#545c64"
+                  text-color="#fff"
+                  active-text-color="#ffd04b"
+                >
+                <el-menu-item index="/dashboard">
+                    <i class="el-icon-menu"></i>
+                    <span>首页</span>
+                  </el-menu-item>
+                  
+                  <el-submenu index="/system">
+                    <template  slot="title">
+                      <i class="el-icon-setting"></i>
+                      <span>权限管理</span>
+                    </template>
+                      <el-menu-item index="/system/user">
+                        <i class="el-icon-menu"></i>
+                        <span>用户管理</span>
+                      </el-menu-item>
+                      <el-menu-item index="/system/role">
+                        <i class="el-icon-menu"></i>
+                      <span> 角色管理</span>
+                        </el-menu-item>
+                      <el-menu-item index="/system/resourcesList">
+                        <i class="el-icon-menu"></i>
+                        <span>资源管理</span>
+                        </el-menu-item>
+                  </el-submenu>
 
-        <el-menu-item index="/record/outList">
-            <i class="el-icon-tickets"></i>
-            <span>入库记录</span>
-          </el-menu-item>
+                <el-menu-item index="/record/outList">
+                    <i class="el-icon-tickets"></i>
+                    <span>入库记录</span>
+                  </el-menu-item>
 
-         <el-menu-item index="/record/inList">
-            <i class="el-icon-tickets"></i>
-            <span>出库记录</span>
-          </el-menu-item>
+                <el-menu-item index="/record/inList">
+                    <i class="el-icon-tickets"></i>
+                    <span>出库记录</span>
+                  </el-menu-item>
 
-        </el-menu>
+                </el-menu>
       </el-aside>
+        </el-main>
+        <el-footer style="line-height:40px;padding: 0 12px;" height="40px">
+          <i @click="icoClick" :class="isCollapse?'el-icon-d-arrow-right':'el-icon-d-arrow-left'" class="c-layout-l-ico"></i>
+        </el-footer>
+      </el-container>
+
+    
       <el-container class="c-layout-b-container">
         <el-main>
           <router-view></router-view>
@@ -100,7 +110,14 @@ import("./BasicLayout.css");
 export default {
   name: "App",
   data() {
-    return {} ;
+    return {
+      isCollapse:false,
+    } ;
+  },
+  methods:{
+    icoClick(){
+      this.isCollapse = !this.isCollapse ;
+    }
   }
 };
 </script>

@@ -1,5 +1,6 @@
 <template>
-    <div>
+   <el-container class="v-p-n-con">
+        <el-main class="v-p-n-main-table">
         <el-row :gutter="20">
             <el-col :span="6">
                 <el-card>
@@ -92,17 +93,11 @@
                 </el-row>
             </el-col>
         </el-row>
-    </div>
+         </el-main>
+     </el-container>
 </template>
 <style>
-.el-row {
-  margin-bottom: 20px;
- margin-left: 0 !important;
- margin-right: 0 !important;
-}
-.el-row:last-child {
-    margin-bottom: 0;
-  }
+
 </style>
 <script>
 import G2 from "@antv/g2";

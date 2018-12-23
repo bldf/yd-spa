@@ -16,6 +16,17 @@
 }
 
 }
+i.c-layout-l-ico{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 50%;
+    background: #666;
+    color: #fff;
+    cursor:pointer; 
+}
 
  .c-layout-b-menu {
 
@@ -25,8 +36,19 @@
                     line-height: 20px;
             }
         }
-.c-layout-b-header,.c-layout-b-aside{
+.c-layout-b-header,.c-layout-b-aside{/** 设置头部和左侧背景颜色 **/
        background: var(--gray);
+}
+.c-layout-b-aside{/** 左侧菜单样式 **/
+    & .el-main{
+       padding : 0 ;
+    }
+    /* & .el-footer{
+        padding:0
+    } */
+    & li>ul {/**  左侧ul清楚横向滚动条 **/
+    overflow: hidden;
+}
 }
 .c-layout-b-company-logo {/**   logo图标 **/
             height: 60px;
@@ -41,9 +63,6 @@
         &>ul{
             display: inline-block ;
         }
-}
-.c-layout-b-aside li>ul {/**  左侧ul清楚横向滚动条 **/
-    overflow: hidden;
 }
 .c-layout-b-footer { /** 底部footer的样式**/
             background:  #eee;
