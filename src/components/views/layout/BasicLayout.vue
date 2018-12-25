@@ -38,7 +38,7 @@
     <el-container>
       <el-container class="c-layout-b-aside">
         <el-main>
-            <el-aside :class="isCollapse?'on':''"  :width="isCollapse?'55px':'155px'">
+            <el-aside :class="isCollapse?'on':''"  :width="isCollapse?'64px':'155px'">
                 <el-menu
                   :default-active="$route.path"
                   :router="true"
