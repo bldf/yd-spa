@@ -40,6 +40,7 @@ i.c-layout-l-ico{
        background: var(--gray);
 }
 .c-layout-b-aside{/** 左侧菜单样式 **/
+     width:185px;
     & .el-main{
        padding : 0 ;
     }
