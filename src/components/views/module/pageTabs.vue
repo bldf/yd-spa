@@ -6,16 +6,6 @@
     :label="item.title"
     :name="item.name"
   >
-    
-<div style="margin-bottom: 20px;">
-  <el-button
-    size="small"
-    @click="addTab(editableTabsValue2)"
-  >
-    add tab
-  </el-button>
-</div>
-    {{item.content}}
   </el-tab-pane>
 </el-tabs>
 

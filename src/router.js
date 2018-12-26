@@ -41,6 +41,12 @@ const router = new Router({
         // UserProfile 会被渲染在 User 的 <router-view> 中
         path: '/materiel/mtp',
         component: () => import("./components/views/module/pageTabs.vue")
+      },
+      {
+        // 当 /user/:id/profile 匹配成功，
+        // UserProfile 会被渲染在 User 的 <router-view> 中
+        path: '/materiel/mtp2',
+        component: () => import("./components/views/module/pageTabs2.vue")
       }
     //   {
     //     // 当 /user/:id/posts 匹配成功

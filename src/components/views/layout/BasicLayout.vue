@@ -74,7 +74,7 @@
 
                 <el-menu-item index="/record/outList">
                     <i class="el-icon-tickets"></i>
-                    <span>入库记录</span>
+                    <span slot="title">入库记录</span>
                   </el-menu-item>
 
                 <el-menu-item index="/record/inList">
