@@ -1,0 +1,23 @@
+.v-m-v-c-m-right-menu{
+ position: fixed;
+  background: #fff;
+  border-radius: 3px;
+  z-index: 999;
+  display: none;
+  box-shadow: 0 0.5em 1em 0 rgba(0,0,0,.1);
+ & a {
+     width: 70px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    display: block;
+    color: #333;
+    padding: 0px;
+    text-decoration: none;
+    font-size: 12px;  
+}
+& a:hover {
+  background: #eee;
+  color: #333;
+}
+}

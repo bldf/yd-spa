@@ -1,14 +1,5 @@
 .v-p-n-con-tag-sc{
-   & .con-scroll{
-    white-space: nowrap;
-    padding:0 22px ;
-      & .el-scrollbar__wrap {
-        height: 55px;
-        overflow-y: hidden;
-    }
-   }
-   &>header {
-    background: #f0f0f0;
+     background: #f0f0f0;
     padding:0 !important;
     position: relative ;
     box-shadow: inset 0 0 3px 2px hsla(0,0%,39.2%,.1);
@@ -18,16 +9,23 @@
             top: 0;
             padding: 7px 5px;
     }
-    &>.btn-left{
-        left: 0;
+        &>.btn-left{
+            left: 0;
+        }
+        &>.btn-right{
+            right:0 ;
+        }
+        & span.el-tag {
+        border-radius: 0;
+        margin: 0 3px;
+        cursor: pointer;
     }
-    &>.btn-right{
-        right:0 ;
+   & .con-scroll{
+    white-space: nowrap;
+    padding:0 22px ;
+      & .el-scrollbar__wrap {
+        height: 55px;
+        overflow-y: hidden;
     }
-    & span.el-tag {
-    border-radius: 0;
-    margin: 0 3px;
-    cursor: pointer;
-}
-    }
+   }
 }

@@ -7,20 +7,22 @@ Vue.use(Router) ;
 const router = new Router({
     routes:[{
         path:'/',
-        name:'BasicLayout',
+        name:'首页',
         component:BasicLayout,
        // meta:{anonymous:true}
        children:[{
         path: "dashboard",
         component: () => import("./components/views/Dashboard.vue"),
       },{
+        name:'用户管理',
         path: "/system/user",
         component: () => import("./components/views/system/user.vue"),
       },{
-        path: "/record/outList",/* 物资出门记录 */
+        name:'出库记录',
+        path: "/record/outList",
         component: () => import("./components/views/record/outList.vue"),
       },{
-        // 当 /user/:id/profile 匹配成功，
+        // 当/user/:id/profile 匹配成功，
         // UserProfile 会被渲染在 User 的 <router-view> 中
         path: 'materiel',
         component: () => import("./components/views/materiel/aputInStorage.vue")
@@ -57,4 +59,14 @@ const router = new Router({
     ]
     }]
 }) ;    
+
+// 导航之前拦截器
+router.beforeEach((to, from, next) => {
+  next(); 
+  console.log('to',to);
+  console.log('from',from);
+  console.log('next',next);
+  console.log('99999')
+
+});
 export default router ;

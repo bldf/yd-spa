@@ -92,6 +92,7 @@
 
     
       <el-container class="c-layout-b-container">
+        <tabheader ref="tabheader"></tabheader>
         <el-main>
           <router-view></router-view>
         </el-main>
@@ -105,6 +106,7 @@
 </template>
 <script>
 import("./BasicLayout.css");
+import tabheader  from "../module/pageTabs2.vue" ;
 // const {map as _map} = import('lodash-es'); 
 // console.log('map-------------',_map);
 export default {
@@ -112,12 +114,16 @@ export default {
   data() {
     return {
       isCollapse:false,
-    } ;
+    };
   },
   methods:{
     icoClick(){
       this.isCollapse = !this.isCollapse ;
+      console.log(this.$route.matched);
     }
-  }
+  },
+    components: {
+        tabheader
+    }
 };
 </script>
