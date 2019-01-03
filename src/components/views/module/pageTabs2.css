@@ -26,6 +26,18 @@
       & .el-scrollbar__wrap {
         height: 55px;
         overflow-y: hidden;
+        & span.el-tag:before{
+                content: ' ';
+                display: inline-block;
+                width: 10px;
+                height: 10px;
+                background: #e8eaec;
+                border-radius: 50%;
+                margin-right: 2mm;
+        }
+        & span.el-tag.on:before{
+                background: #2d8cf0;
+            }
     }
    }
 }

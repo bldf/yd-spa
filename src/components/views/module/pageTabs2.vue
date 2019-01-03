@@ -10,6 +10,8 @@
             @contextmenu.native.prevent="f$showconTextMenu($event,tag)"
             color='#fff'
             type="info"
+            :class="tag.url==onTagUrl?'on':''"
+            @click.native="e$tagClick(tag)"
             @close="e$handleClose(tag)">
             {{tag.title}}
           </el-tag>
@@ -42,7 +44,8 @@ import { findIndex } from "lodash-es";
         contextMenuVisible:false,
         m$homePage,
         m$context:m$homePage,//当前右击的标签
-        m$dynamicTags:[m$homePage]
+        m$dynamicTags:[m$homePage],
+        onTagUrl: m$homePage.url
       };
     },
     mounted(){
@@ -93,7 +96,8 @@ import { findIndex } from "lodash-es";
      * 添加标签
      */
     f$addHandle(tag){
-       this.m$dynamicTags.push(tag);
+       this.onTagUrl = tag.url ;
+       !~findIndex(this.m$dynamicTags,d=>d.url==tag.url)&&this.m$dynamicTags.push(tag);
     },
     /**
      * 刷新当前page
@@ -106,6 +110,12 @@ import { findIndex } from "lodash-es";
      */
     e$closeOtherHandle(tag){
       this.m$dynamicTags=[tag] ;
+    },
+    /**
+     * 用户点击标签页
+     */
+    e$tagClick(tag){
+      this.$router.push(tag.url) ;
     },
     /**
      * 关闭所有标签

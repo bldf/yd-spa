@@ -63,6 +63,14 @@ const router = new Router({
 // 导航之前拦截器
 router.beforeEach((to, from, next) => {
   next(); 
+  var title = to.matched[1].name ;
+  var url = to.matched[1].path ;
+  // to.matched[1]
+  // console.log('0000');
+  // console.log(to.matched[0].components.default.components.tabheader.data)
+  // console.log(to.matched[0].instances.default.$refs.tabheader.f$addHandle({title,url})); 
+  to.matched[0].instances.default.$refs.tabheader.f$addHandle({title,url})
+  // to.matched[0].components.default.components.tabheader.methods.f$addHandle({title,url}) ;
   console.log('to',to);
   console.log('from',from);
   console.log('next',next);

@@ -109,6 +109,7 @@ import("./BasicLayout.css");
 import tabheader  from "../module/pageTabs2.vue" ;
 // const {map as _map} = import('lodash-es'); 
 // console.log('map-------------',_map);
+
 export default {
   name: "App",
   data() {
@@ -119,7 +120,6 @@ export default {
   methods:{
     icoClick(){
       this.isCollapse = !this.isCollapse ;
-      console.log(this.$route.matched);
     }
   },
     components: {
