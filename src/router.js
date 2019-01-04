@@ -6,11 +6,24 @@ import store from "./store";
 Vue.use(Router) ;
 const router = new Router({
     routes:[{
+      path:'/redirect',
+      name:'redirect',
+      // redirect:'/system/user'
+      redirect:to=>{
+        const { hash, params, query } = to ;
+        console.log('params',params.url)
+        return params.url;
+      }
+    },{
         path:'/',
         name:'首页',
         component:BasicLayout,
        // meta:{anonymous:true}
        children:[{
+        path:'/redirect2',
+        name:'redirect2',
+        component:() => import("./components/views/module/redirect.vue"),
+      },{
         path: "dashboard",
         component: () => import("./components/views/Dashboard.vue"),
       },{
@@ -62,19 +75,28 @@ const router = new Router({
 
 // 导航之前拦截器
 router.beforeEach((to, from, next) => {
+ 
+  //  console.log('to',to);
+  // console.log('from',from);
+  // console.log('next',next);
+  // console.log('99999')
+  console.log('to.redirectedFrom',to.redirectedFrom) ;
+// debugger ;
+  // console.log({title,url}) ;
+  // console.log( to.matched[0].instances) ;
+  try {
+    var title = to.matched[1].name ;
+    var url = to.matched[1].path ;
+    to.matched[0].instances.default.$refs.tabheader.f$addHandle({title,url})
+  } catch (error) {
+    
+  }
   next(); 
-  var title = to.matched[1].name ;
-  var url = to.matched[1].path ;
   // to.matched[1]
   // console.log('0000');
   // console.log(to.matched[0].components.default.components.tabheader.data)
   // console.log(to.matched[0].instances.default.$refs.tabheader.f$addHandle({title,url})); 
-  to.matched[0].instances.default.$refs.tabheader.f$addHandle({title,url})
   // to.matched[0].components.default.components.tabheader.methods.f$addHandle({title,url}) ;
-  console.log('to',to);
-  console.log('from',from);
-  console.log('next',next);
-  console.log('99999')
 
 });
 export default router ;

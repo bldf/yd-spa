@@ -98,7 +98,7 @@
         </el-main>
         <el-footer class="c-layout-b-footer" height="30px">
                <div class="footer-reserved">Copyright ©  SDINT All Rights Reserved 仕点智能</div>
-              <span style="position: absolute;right: 1em; top: 0;font-size: 12px;  line-height: 30px;">2018-11-30 14:05</span>
+              <span v-text="time" style="position: absolute;right: 1em; top: 0;font-size: 12px;  line-height: 30px;"></span>
         </el-footer>
       </el-container>
     </el-container>
@@ -107,6 +107,7 @@
 <script>
 import("./BasicLayout.css");
 import tabheader  from "../module/pageTabs2.vue" ;
+import _T from "../../common/index.js";
 // const {map as _map} = import('lodash-es'); 
 // console.log('map-------------',_map);
 
@@ -115,15 +116,28 @@ export default {
   data() {
     return {
       isCollapse:false,
+      time:'',
     };
   },
   methods:{
     icoClick(){
       this.isCollapse = !this.isCollapse ;
+    },
+    getTime(){
+       return _T.format(new Date(),1);
     }
   },
-    components: {
-        tabheader
-    }
+  mounted(){
+    var url = this.$router.history.current.path ; 
+    var title = this.$router.history.current.name ;
+    this.$refs.tabheader.f$addHandle({url,title}) ;
+    clearInterval(window.HOMEPAGETIMEINTER) ;
+    window.HOMEPAGETIMEINTER = setInterval(d=>{
+      this.time =this.getTime() ;
+    },1000);
+  },
+  components: {
+      tabheader
+  }
 };
 </script>
