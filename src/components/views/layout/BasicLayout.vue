@@ -94,7 +94,9 @@
       <el-container class="c-layout-b-container">
         <tabheader ref="tabheader"></tabheader>
         <el-main>
-          <router-view></router-view>
+          <!-- <keep-alive :max="20"> -->
+            <router-view></router-view>
+          <!-- </keep-alive> -->
         </el-main>
         <el-footer class="c-layout-b-footer" height="30px">
                <div class="footer-reserved">Copyright ©  SDINT All Rights Reserved 仕点智能</div>

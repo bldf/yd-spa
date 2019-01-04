@@ -30,10 +30,16 @@ const router = new Router({
         name:'用户管理',
         path: "/system/user",
         component: () => import("./components/views/system/user.vue"),
+        meta: { 
+          keepAlive: true 
+        }
       },{
-        name:'出库记录',
+        name:'入库记录',
         path: "/record/outList",
         component: () => import("./components/views/record/outList.vue"),
+        meta: { 
+          keepAlive: true 
+        }
       },{
         // 当/user/:id/profile 匹配成功，
         // UserProfile 会被渲染在 User 的 <router-view> 中
@@ -80,10 +86,17 @@ router.beforeEach((to, from, next) => {
   // console.log('from',from);
   // console.log('next',next);
   // console.log('99999')
-  console.log('to.redirectedFrom',to.redirectedFrom) ;
 // debugger ;
   // console.log({title,url}) ;
   // console.log( to.matched[0].instances) ;
+  // if (to && (to.name !== '入库记录' || to.name !== '用户管理') ){
+  //   // 不是去 C 页面，不缓存
+  //   from.meta.keepAlive = false
+  // } else {
+  //   // 是去 C 页面，缓存
+  //   from.meta.keepAlive = true
+  // }
+
   try {
     var title = to.matched[1].name ;
     var url = to.matched[1].path ;
@@ -91,6 +104,8 @@ router.beforeEach((to, from, next) => {
   } catch (error) {
     
   }
+
+
   next(); 
   // to.matched[1]
   // console.log('0000');
