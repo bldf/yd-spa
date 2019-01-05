@@ -22,13 +22,15 @@ const loading = {
     // html:resolve('./loading.html')
     html: fs.readFileSync('./loading.html','utf-8')
 };
-if(!_modeflag){//如果是生产环境 
-    loading.linkElementUi = '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">' ;
-    loading.ElementJs = '<script src="/node_modules/element-ui/lib/index.js"></script>' ;
-}else{
-    loading.linkElementUi = '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">'; 
-    loading.ElementJs = '<script src="https://unpkg.com/element-ui/lib/index.js"></script>' ;
-}
+
+
+// if(!_modeflag){//如果是生产环境 
+//     loading.linkElementUi = '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">' ;
+//     loading.ElementJs = '<script src="/node_modules/element-ui/lib/index.js"></script>' ;
+// }else{
+//     loading.linkElementUi = '<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">'; 
+//     loading.ElementJs = '<script src="https://unpkg.com/element-ui/lib/index.js"></script>' ;
+// }
 
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin');
 // webpack 默认会去找 src下边的index.js . 如果是单页应用 。entry这个入口文件，就可以不用写了
@@ -40,7 +42,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin'); //配置加载ｖｕ�
 // const ExtractTextPlugin = require("extract-text-webpack-plugin") ; // 提取vue文件中的css
 
 const CopyWebpackPlugin = require('copy-webpack-plugin'); // 配置提取公共图片
-
 
 let webpackConfig;
 webpackConfig = {//基本配置， 外边的配置， 在config里边。可以区分开发环境和上线环境
@@ -54,32 +55,46 @@ webpackConfig = {//基本配置， 外边的配置， 在config里边。可以�
                 extractCSS: true
             }
              },
-            {//配置图片压缩的loader
-            test: /\.(gif|png|jpe?g|svg)$/i,
-            use: [
-                {
-                    loader: 'file-loader',
-                    options: {
-                        name:"[path][hash].[ext]",
-                        // emitFile:false,
-                        context:resolve(__dirname, 'src'),  
-                        publicPath:'/public',
-                        // useRelativePath:true,
-                        outputPath:'public'
-                    }
-                  },
-                // 'file-loader',
-                {
-                    loader: 'image-webpack-loader',
-                    options: {
-                       bypassOnDebug: true, // webpack@1.x
-                        disable: true, // webpack@2.x and newer
-                    },
-                },
-            ],
-        }
-        ,
+
+        //     {//配置图片压缩的loader
+        //     test: /\.(gif|png|jpe?g|svg)$/i,
+        //     use: [
+        //         {
+        //             loader: 'file-loader',
+        //             options: {
+        //                 name:"[path][hash].[ext]",
+        //                 // emitFile:false,
+        //                 context:resolve(__dirname, 'src'),  
+        //                 publicPath:'/public',
+        //                 // useRelativePath:true,
+        //                 outputPath:'public'
+        //             }
+        //           },
+        //         // 'file-loader',
+        //         {
+        //             loader: 'image-webpack-loader',
+        //             options: {
+        //                bypassOnDebug: true, // webpack@1.x
+        //                 disable: true, // webpack@2.x and newer
+        //             },
+        //         },
+        //     ],
+        // }
+        // ,
         
+             
+        {
+            test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+            use: [{
+              loader: 'url-loader',
+              options: {
+                limit: 10 * 1024  // 如果页面中的图片的大小小于10kb， 直接转换为base64到页面中
+              }
+            }]
+          },
+
+
+
         // {//配置，图片小于多少转换为base64
         //     test: /\.(png|jpg|gif|ttf|otf|svg)$/i,
         //     use: [
